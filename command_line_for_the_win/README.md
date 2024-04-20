@@ -3,12 +3,12 @@
 ## Steps For ***SFTP Uploading***
 - Open Any terminal
 - Connect to SFTP Using
-  '''
-  sftp ahmedshehab@your_server_ip_or_remote_hostname
-  '''
+'''
+sftp ahmedshehab@your_server_ip_or_remote_hostname
+'''
 - Go To Specified Directory
 - Use put command to transfer local files (img) to remote system
-  '''
-  put filename
-  '''
+'''
+put filename
+'''
 - push changes to remote repo
