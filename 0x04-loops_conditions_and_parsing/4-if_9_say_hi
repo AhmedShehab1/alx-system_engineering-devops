@@ -2,10 +2,10 @@
 # Printing "Best School" 10 times and adding "Hi" at the ninth time
 
 i=0
-while (($i < 10))
+while ((i < 10))
 do
 echo "Best School"
-if (($i == 8))
+if ((i == 8))
 then
 	echo "Hi"
 fi
