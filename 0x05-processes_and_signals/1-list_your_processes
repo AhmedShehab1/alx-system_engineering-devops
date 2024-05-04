@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Displays a list of Currently Running processes
 
-ps -u
+ps -uf
