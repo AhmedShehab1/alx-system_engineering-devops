@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Displays PID along with process name of processes whose names contain the word bash
+
+bash_pid=$(pidof bash)
+
+for pid in $bash_pid
+do
+	echo "$pid bash"
+done
