@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Script To Display Numbers from 1 to 100 in a list format replacing the number by "FizzBuzz" if multiple of 3 & 5, "Fizz" if multiple of 3 alone and "Buzz" if multiple of 5 only
+
+i=0
+
+until [ "$((i++))" -gt 99 ]
+do
+	if [ "$((i % 5))" -eq 0 ] && [ "$((i % 3))" -eq 0 ]
+	then
+		echo "FizzBuzz"
+
+	elif [ "$((i % 5))" -eq 0 ]
+	then
+		echo "Buzz"
+	elif [ "$((i % 3))" -eq 0 ]
+	then
+		echo "Fizz"
+	else
+		echo "$i"
+	fi
+done
+
