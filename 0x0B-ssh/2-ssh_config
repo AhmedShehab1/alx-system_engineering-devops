@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# configuring config file to disable passwd authentication to all servers
+
+HOST *
+	IdentityFile           ~/.ssh/school
+	PasswordAuthentication no
