@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Installing nginx web server
+
+sudo apt-get -qq update
+
+sudo apt-get -y -qq install nginx
+
+# Adjusting the Firewall allowing traffic on port 80
+sudo ufw allow 'Nginx HTTP'
+
+# Overwriting existing content in of web
+sudo su
+echo "Hello World!" > /var/www/html/*html
+
