@@ -6,8 +6,7 @@ sudo apt-get -qq update
 sudo apt-get -y -qq install nginx
 
 # Adjusting the Firewall allowing traffic on port 80
-sudo ufw allow 'Nginx HTTP'
+sudo ufw allow 80
 
 # Overwriting existing content in of web
-sudo su
-echo "Hello World!" > /var/www/html/*html
+echo "Hello World!" | sudo tee /var/www/html/*html > /dev/null
