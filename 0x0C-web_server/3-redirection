@@ -12,7 +12,7 @@ sudo ufw allow 80
     
 sudo systemctl start nginx
 #Allowing sufficient permissions for error logging
-sudo chown -R $USER:$USER /var/log/nginx
+sudo chown -R "$USER":"$USER" /var/log/nginx
 sudo chmod 755 /var/log/nginx
 sudo chmod 644 /var/log/nginx/error.log
 
