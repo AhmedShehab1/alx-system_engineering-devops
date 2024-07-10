@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Configuring server to return 301 permanent redirection when trying to access /redirect_me/ location
-    
+# Configuring server to return custom HTTP Header X-Served-By In For Usage in Load Balancer
+
 # Installing nginx web server
 
 sudo apt-get -qq update
@@ -10,10 +10,10 @@ sudo apt-get -y -qq install nginx
 # Adjusting the Firewall allowing traffic on port 80
 sudo ufw allow 80
     
-#Allowing sufficient permissions for error logging
+# Allowing sufficient permissions for error logging
 sudo chown -R "$USER":"$USER" /var/log/nginx
 sudo chmod 755 /var/log/nginx
 sudo chmod 644 /var/log/nginx/error.log
 
-sudo sed -i "54i\\\tlocation /redirect_me/ {\nreturn 301;\n\t}" /etc/nginx/sites-available/default
+sudo sed -i "45i\\\tadd_header X-Served-By $hostname always;" /etc/nginx/sites-available/default
 sudo nginx -s reload
