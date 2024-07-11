@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Configuring server to return custom page with a Not found 404 error code
+    
+# Installing nginx web server
+
+sudo apt-get -qq update
+
+sudo apt-get -y -qq install nginx
+
+# Adjusting the Firewall allowing traffic on port 80
+sudo ufw allow 80
+    
+#Allowing sufficient permissions for error logging
+sudo chown -R "$USER":"$USER" /var/log/nginx
+sudo chmod 755 /var/log/nginx
+sudo chmod 644 /var/log/nginx/error.log
+
+sudo echo -e "Ceci n'est pas une page\n" > /var/www/html/custom_error_page.html
+sudo echo 'server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /var/www/html;
+
+	index index.html index.htm index.nginx-debian.html;
+	add_header X-Served-By $hostname always;
+	server_name _;
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		return 404;
+		try_files $uri $uri/ =404;
+	}
+
+	error_page 404 /custom_error_page.html;
+	location = /custom_error_page.html {
+		internal;
+	}
+}
+' > /etc/nginx/sites-available/default
+sudo nginx -s reload
+    
