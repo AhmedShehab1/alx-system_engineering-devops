@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# Usage: ./0-world_wide_web domain_name [OPTIONAL: subdomain]
+
+
+# Outputs record type and destination ip for subdomain(s)
+
+domain_name="$1"
+
+show_all() {
+	sub_domains=("www" "lb-01" "web-01" "web-02")
+
+		
+	for sub_domain in "${sub_domains[@]}";
+	do
+		record_type="$(dig "$sub_domain"."$domain_name" | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print $4}')"
+		dest_address="$(dig "$sub_domain"."$domain_name" +short)"
+		echo "The subdomain $sub_domain is a $record_type record and points to $dest_address";
+	done
+}
+        
+if [ -n "$2" ]
+then
+	record_type="$(dig "$2"."$domain_name" | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print $4}')"
+	dest_address="$(dig "$2"."$domain_name" +short)"		
+	echo "The subdomain $2 is a $record_type record and points to $dest_address";
+else
+	show_all
+fi
+
