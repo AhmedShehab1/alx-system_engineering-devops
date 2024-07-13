@@ -14,12 +14,18 @@ defaults
 	timeout client  10000
 	timeout server  10000
 listen hbnb
-	bind *:80
-	mode http
 	stats enable
 	stats uri /haproxy?stats
 	stats realm Strictly\ Private
 	stats auth Ahmed:Shehab
+
+backend web-servers
 	balance roundrobin
 	server 440666-web-02 54.82.200.213:80 check
 	server 440666-web-01 52.3.245.218:80 check
+
+
+frontend www-https
+	bind *:443 ssl crt /etc/haproxy/certs/www.ahmedshehab.tech.pem
+	default_backend web-servers
+
