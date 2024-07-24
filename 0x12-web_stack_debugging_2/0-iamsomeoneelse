@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Running 'whoami' command where usr is given as param
+
+if [ -n "$1" ]
+then
+	sudo -u "$1" whoami
+fi
