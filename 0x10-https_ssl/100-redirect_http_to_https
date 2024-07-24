@@ -1,0 +1,34 @@
+global
+	log 127.0.0.1 local0 notice
+	maxconn 2000
+	user haproxy
+	group haproxy
+defaults
+	log     global
+	mode    http
+	option  httplog
+	option  dontlognull
+	retries 3
+	option redispatch
+	timeout connect  5000
+	timeout client  10000
+	timeout server  10000
+listen hbnb
+	stats enable
+	stats uri /haproxy?stats
+	stats realm Strictly\ Private
+
+backend web-servers
+	balance roundrobin
+	cookie SRVNAME insert
+	server 440666-web-02 54.82.200.213:80 check cookie web-02
+	server 440666-web-01 52.3.245.218:80 check  cookie web-01
+
+frontend www-http
+	bind *:80
+	redirect scheme https code 301 if !{ ssl_fc }
+
+frontend www-https
+	bind *:443 ssl crt /etc/haproxy/certs/www.ahmedshehab.tech.pem
+	default_backend web-servers
+
