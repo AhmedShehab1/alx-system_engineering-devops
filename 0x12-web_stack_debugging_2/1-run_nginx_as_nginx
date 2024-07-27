@@ -6,4 +6,3 @@ echo 'user nginx nginx;' >> /etx/nginx/nginx.conf
 chown -R nginx:nginx /etc/nginx
 chmod -R 755 /etc/nginx
 sudo -u nginx /usr/sbin/nginx
-
