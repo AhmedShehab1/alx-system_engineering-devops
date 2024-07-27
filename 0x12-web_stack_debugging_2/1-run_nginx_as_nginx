@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Configuring nginx webserver to run as a less privileged user
+sudo netstat -tulnp | grep ':8080' | grep -Eo "[0-9]+/[a-z0-9]+" | cut -d  '/' -f 1 | xargs kill
+sed -i 's/80/8080/g' /etc/nginx/sites-available/default
+echo 'user nginx nginx;' >> /etx/nginx/nginx.conf
+chown -R nginx:nginx /etc/nginx
+chmod -R 755 /etc/nginx
+sudo -u nginx /usr/sbin/nginx
+
