@@ -11,11 +11,11 @@ if __name__ == "__main__":
 
     def get_name(employee_id):
         json_response = get_response(f'users/{employee_id}').json()
-        return json_response['name']
+        return json_response.get('name')
 
     def get_response(route_to_append):
         return requests.get(f'https://jsonplaceholder.typicode.com/\
-        {route_to_append}')
+{route_to_append}')
 
     def get_tasks_dict(employee_id):
         tasks = get_response(f'todos?userId={employee_id}')
@@ -30,7 +30,7 @@ if __name__ == "__main__":
         return done_tasks
 
     print(f'Employee {get_name(employee_id)} is done with tasks\
-    ({len(get_done_tasks_title(employee_id))}\
-    /{len(get_tasks_dict(employee_id))}):')
+({len(get_done_tasks_title(employee_id))}\
+/{len(get_tasks_dict(employee_id))}):')
     for task_title in get_done_tasks_title(employee_id):
         print(f' \t{task_title}')
