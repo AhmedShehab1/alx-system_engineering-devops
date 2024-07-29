@@ -33,4 +33,4 @@ if __name__ == "__main__":
 ({len(get_done_tasks_title(employee_id))}\
 /{len(get_tasks_dict(employee_id))}):')
     for task_title in get_done_tasks_title(employee_id):
-        print(f' \t{task_title}')
+        print(f'\t {task_title}')
