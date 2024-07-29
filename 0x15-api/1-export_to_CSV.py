@@ -12,10 +12,10 @@ if __name__ == "__main__":
     data = []
     employee_id = sys.argv[1]
 
-    def get_name(employee_id):
+    def get_username(employee_id):
         if not name:
             json_response = get_response(f'users/{employee_id}').json()
-            return json_response.get('name')
+            return json_response.get('username')
         else:
             return name
 
@@ -36,7 +36,7 @@ if __name__ == "__main__":
         return done_tasks
 
     for task in get_tasks_dict(employee_id):
-        temp_list = [f"{employee_id}", f"{get_name(employee_id)}",
+        temp_list = [f"{employee_id}", f"{get_username(employee_id)}",
                      f"{task.get('completed')}", f"{task.get('title')}"]
         data.append(temp_list)
     with open(f'{employee_id}.csv', mode='w', newline='') as csv_file:
