@@ -9,9 +9,7 @@ import sys
 
 if __name__ == "__main__":
     name = None
-    data = [
-        ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"]
-    ]
+    data = []
     employee_id = sys.argv[1]
 
     def get_name(employee_id):
