@@ -3,7 +3,6 @@
 Gathering employee data
 """
 
-import csv
 import json
 import requests
 import sys
@@ -14,11 +13,11 @@ if __name__ == "__main__":
     employee_id = sys.argv[1]
 
     def get_username(employee_id):
+        global name
         if not name:
             json_response = get_response(f'users/{employee_id}').json()
-            return json_response.get('username')
-        else:
-            return name
+            name = json_response.get('username')
+        return name
 
     def get_response(route_to_append):
         return requests.get(f'https://jsonplaceholder.typicode.com/\
