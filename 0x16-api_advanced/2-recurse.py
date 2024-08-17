@@ -7,20 +7,22 @@ for a given subreddit.
 import requests
 
 
-list_data = []
+def recurse(subreddit, hot_list=[], after=None):
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    url = f'https://www.reddit.com/r/{subreddit}/hot.json?limit=100'
 
+    if after:
+        url += f'&after={after}'
+    response = requests.get(url, headers=headers)
+    if not response:
+        return None
 
-def recurse(subreddit, hot_list=[]):
-    global list_data
-    if len(hot_list) == 0:
-        response = requests.get(f"https://www.reddit.com/r/\
-{subreddit}/hot.json?show=all")
-        response_json = response.json()
-        if not response:
-            return None
-        list_data = response_json.get('data').get('children')
+    response_json = response.json()
+    posts = response_json.get('data', {}).get('children', [])
+    for post in posts:
+        hot_list.append(post.get('data').get('title'))
+    after = response_json.get('data', {}).get('after')
+    if after:
+        return recurse(subreddit, hot_list, after)
 
-    if list_data == []:
-        return hot_list
-    hot_list.append(list_data.pop(0).get('data').get('title'))
-    return recurse(list_data[len(hot_list):], hot_list)
+    return hot_list
