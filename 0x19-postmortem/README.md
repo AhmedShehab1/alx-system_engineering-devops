@@ -39,7 +39,3 @@ Thanks to these changes, we’re now prepared for the next flash mob of users (b
 ---
 
 **Moral of the story**: Servers need love too—just make sure it’s the right kind of love.
-
----
-
-This version is designed to be both informative and engaging, using humor and a conversational tone to make the content more relatable. The addition of a fake diagram (not actually linked) adds a playful touch, encouraging the audience to imagine what it might look like.
