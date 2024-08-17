@@ -7,8 +7,9 @@ import requests
 
 
 def top_ten(subreddit):
+    headers = {'User-Agent': 'Mozilla/5.0'}
     response = requests.get(f"https://www.reddit.com/r/{subreddit}\
-/hot.json?limit=10")
+/hot.json?limit=10", headers=headers)
     if response:
         response_json = response.json()
         for post in response_json.get('data', {}).get('children', []):
